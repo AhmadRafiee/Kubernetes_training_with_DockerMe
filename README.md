@@ -23,7 +23,7 @@ The tools and sample needed to learn the Kubernetes.
   - [kubernetes mixin grafana dashboards](tools/kubernetes-mixin/grafana-dashboards)
   - [kubernetes mixin prometheus alerts](tools/kubernetes-mixin/prometheus_alerts.yaml)
   - [kubernetes mixin prometheus rules](tools/kubernetes-mixin/prometheus_rules.yaml)
-  - [kubernetes install helm](scenario/install-helm.md)
+  - [kubernetes install helm](tools/install-helm.md)
 
 
 - [Kubernetes Scenario:](scenario)
@@ -38,8 +38,8 @@ The tools and sample needed to learn the Kubernetes.
   - [kubernetes roolout](scenario/rollout-test.md)
   - [kubernetes weavescope deploy](scenario/weavescope.md)
   - [kubernetes wordperss scenario](scenario/wordpress.md)
-  - [kubernetes and ceph-csi ](storage/ceph-csi.md)
-  - [kubernetes and bb-csi](storage/block-bridge-csi.md)
+  - [kubernetes and ceph-csi ](scenario/ceph-csi.md)
+  - [kubernetes and bb-csi](scenario/block-bridge-csi.md)
   - [kubernetes sample nginx](scenario/nginx-test)
   - [kubernetes sample app](scenario/sample-app)
   - [kubernetes ingress and cert-manager setup](scenario/ingress-certmanager.md)
