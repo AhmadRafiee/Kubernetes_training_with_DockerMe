@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: affinity-required
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: my-node-id
+                operator: In
+                values:
+                  - a
+                  - b
+  containers:
+    - name: hello
+      image: ondrejsika/go-hello-world:2
+      resources:
+        requests:
+          memory: 10Mi
+          cpu: 10m
+        limits:
+          memory: 20Mi
+          cpu: 20m

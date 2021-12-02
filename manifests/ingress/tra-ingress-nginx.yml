@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: tra.monlog.ir
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: traefik
+          servicePort: 8100

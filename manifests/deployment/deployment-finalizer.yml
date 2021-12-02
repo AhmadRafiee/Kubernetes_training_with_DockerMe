@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: foobar-deployment
+  finalizers:
+  - example.com/test-finalizer
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        foo: bar
+    spec:
+      containers:
+      - image: nginxdemos/hello
+        name: main
+        ports:
+        - containerPort: 80
+          protocol: TCP

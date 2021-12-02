@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: affinity-preferred
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+              - key: cpu-perf
+                operator: In
+                values:
+                  - high
+                  - high-intel
+                  - high-amd
+        - weight: 99
+          preference:
+            matchExpressions:
+              - key: cpu-perf
+                operator: In
+                values:
+                  - medium
+                  - medium-intel
+                  - medium-amd
+  containers:
+    - name: hello
+      image: ondrejsika/go-hello-world:2
+      resources:
+        requests:
+          memory: 10Mi
+          cpu: 10m
+        limits:
+          memory: 20Mi
+          cpu: 20m

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-hello-world
+  labels:
+    app: simple-hello-world
+    svc: example
+spec:
+  containers:
+    - name: main
+      image: ondrejsika/go-hello-world:2
+      ports:
+        - containerPort: 80
+      resources:
+        requests:
+          memory: 10Mi
+          cpu: 10m
+        limits:
+          memory: 20Mi
+          cpu: 20m
