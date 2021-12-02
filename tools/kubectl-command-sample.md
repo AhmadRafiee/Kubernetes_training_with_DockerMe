@@ -238,7 +238,7 @@ kubectl label nodes minikube foo=bar
 ```
 
 
-# json pacth 
+# json path 
 ```bash
 kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}' > /root/CKA/node_ips
 kubectl get nodes -o=jsonpath='{.items[*].metadata.name}'
