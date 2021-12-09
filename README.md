@@ -32,7 +32,7 @@ The tools and sample needed to learn the Kubernetes.
   - [kubernetes dns test](scenario/kubernetes-dns-test.md)
   - [kubernetes dashboard](scenario/kubernetes-dashboard.md)
   - [kubernetes portainer dashboard](scenario/portianer-dashboards.md)
-  - [kubernetes deployment strtategy](scenario/deployment-strategy.md)
+  - [kubernetes deployment strategies](scenario/deployment-strategies)
   - [kubernetes logging loki](scenario/loki.md)
   - [kubernetes monitoring prometheus](scenario/prometheus.md)
   - [kubernetes roolout](scenario/rollout-test.md)
@@ -60,14 +60,15 @@ The tools and sample needed to learn the Kubernetes.
   - [storage](manifests/storage)
 
 
-
-
-
 # In Progress Task:
 - etcdadm: https://github.com/kubernetes-sigs/etcdadm
 - minikube
 - k3s
 - private-registry harbor
+- pdf and ebook
+- other resource
+- HPA
+- kubespray
 
 
 # Reference:
