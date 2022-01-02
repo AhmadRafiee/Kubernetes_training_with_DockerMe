@@ -191,3 +191,5 @@ spec:
 ```bash
 kubectl get ingress
 ```
+
+[WordPress and MySQL on Kubernetes](https://github.com/kubernetes/examples/tree/master/mysql-wordpress-pd)

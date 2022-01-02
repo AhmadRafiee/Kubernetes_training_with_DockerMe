@@ -45,6 +45,8 @@ The tools and sample needed to learn the Kubernetes.
   - [kubernetes ingress and cert-manager setup](scenario/ingress-certmanager.md)
   - [kubeapps](scenario/kubeapps.md)
   - [kubernetes backup|restore with velero](scenario/velero.md)
+  - [Cassandra with StatefulSets on Kubernetes](https://github.com/kubernetes/examples/tree/master/cassandra)
+  
 
 
 - [Kubernetes Manifests:](manifests)
@@ -60,6 +62,10 @@ The tools and sample needed to learn the Kubernetes.
   - [storage](manifests/storage)
 
 
+- [Others:](others)
+  - [Phippy and friends:](others/Phippy_and_friends)
+
+
 # In Progress Task:
 - etcdadm: https://github.com/kubernetes-sigs/etcdadm
 - minikube
@@ -69,6 +75,7 @@ The tools and sample needed to learn the Kubernetes.
 - other resource
 - HPA
 - kubespray
+
 
 
 # Reference:
