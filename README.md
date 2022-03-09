@@ -24,6 +24,7 @@ The tools and sample needed to learn the Kubernetes.
   - [kubernetes mixin prometheus alerts](tools/kubernetes-mixin/prometheus_alerts.yaml)
   - [kubernetes mixin prometheus rules](tools/kubernetes-mixin/prometheus_rules.yaml)
   - [kubernetes install helm](tools/install-helm.md)
+  - [kubernetes manisfest validator](tools/manifest-validator.md)
 
 
 - [Kubernetes Scenario:](scenario)
