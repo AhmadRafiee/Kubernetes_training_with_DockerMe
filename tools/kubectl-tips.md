@@ -173,3 +173,5 @@ kubectl tree --help
 # Others good Tips
 - [kubectl-df-pv:](https://github.com/yashbhutwala/kubectl-df-pv) A kubectl plugin to see df for persistent volumes.
 - [kubectl-images:](https://github.com/chenjiandongx/kubectl-images) Show container images used in the cluster
+- [ksniff:](https://github.com/eldadru/ksniff) A kubectl plugin that utilize tcpdump and Wireshark to start a remote capture on any pod in your Kubernetes cluster.
+- [krew plugins list:](https://krew.sigs.k8s.io/plugins/) Kubectl plugins
