@@ -1,5 +1,124 @@
-### Install tools and dependency
-### On all Servers
+# Install tools and dependency
+
+## Install and configure prerequisites (On all Servers)
+```bash
+echo "Disable and turn off SWAP"
+sed -i '/swap/d' /etc/fstab
+swapoff -a
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y ca-certificates curl gnupg lsb-release
+cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+EOF
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+EOF
+
+sudo sysctl --system
+```
+
+## Install Containerd (On all Servers)
+### Using Docker repository
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
+sudo apt update
+sudo apt install -y containerd.io runc
+cat <<EOF | sudo tee -a /etc/containerd/config.toml
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+SystemdCgroup = true
+EOF
+sudo sed -i 's/^disabled_plugins \=/\#disabled_plugins \=/g' /etc/containerd/config.toml
+sudo systemctl restart containerd
+sudo systemctl status containerd
+```
+## Using Containerd binaries (offical)
+### Install Containerd core
+First, download the latest version of `containerd` from [GitHub](https://github.com/containerd/containerd/releases) and extract the files to the `/usr/local/` directory.
+
+```bash
+# Set Containerd version
+export "containerd_version=1.6.8"
+
+# Download Containerd
+wget "https://github.com/containerd/containerd/releases/download/v${containerd_version}/containerd-${containerd_version}-linux-amd64.tar.gz"
+# Extract Containerd
+sudo tar Czxvf /usr/local "containerd-${containerd_version}-linux-amd64.tar.gz"
+```
+
+Download Containerd service
+```bash
+wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+```
+
+Configuration
+```bash
+sudo mkdir -p /etc/containerd/
+containerd config default | sudo tee /etc/containerd/config.toml
+sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+```
+
+Install Containerd service
+```bash
+sudo mv containerd.service /usr/lib/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now containerd
+```
+View Containerd service status
+```bash
+sudo systemctl status containerd
+```
+### Install runC
+
+runC is an open-source container runtime for spawning and running containers on Linux according to the OCI specification.
+
+Download the latest version of `runC` from [GitHub](https://github.com/opencontainers/runc/releases) and install it as `/usr/local/sbin/runc`.
+```bash
+export "runc_version=1.1.4"
+
+wget "https://github.com/opencontainers/runc/releases/download/v${runc_version}/runc.amd64"
+
+sudo install -m 755 runc.amd64 /usr/local/sbin/runc
+```
+
+### Install CNI Plugins For Containerd
+
+For the container to run, you need to install CNI plugins. So, download the latest version of CNI plugins from [GitHub](https://github.com/containernetworking/plugins/releases) and place them in the `/opt/cni/bin` directory.
+```bash
+export "cni_version=1.1.1"
+
+sudo mkdir -p /opt/cni/bin/
+
+sudo wget "https://github.com/containernetworking/plugins/releases/download/v${cni_version}/cni-plugins-linux-amd64-v${cni_version}.tgz"
+
+sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v${cni_version}.tgz
+```
+Restart the containerd service.
+```bash
+sudo systemctl restart containerd
+```
+
+### Install Nerdctl (Optional)
+nerdctl is a Docker-compliant command-line interface for containerd. It is not part of the core package. So, this has to be installed separately.
+
+Download the latest version of `nerdctl` from [GitHub](https://github.com/containerd/nerdctl/releases) and extract it to the `/usr/local/bin` directory.
+
+```bash
+export "nerdctl_version=0.22.2"
+wget "https://github.com/containerd/nerdctl/releases/download/v${nerdctl_version}/nerdctl-${nerdctl_version}-linux-amd64.tar.gz"
+
+sudo tar Cxzvf /usr/local/bin nerdctl-${nerdctl_version}-linux-amd64.tar.gz
+```
+## Set ips and domains on all servers
 ```bash
 echo "Change hostname"
 hostnamectl set-hostname 
@@ -39,47 +158,9 @@ echo "domain name"
 domain_name=monlog.ir
 ```
 
-### Install and configuration docker
-### On all Servers
-```bash
-echo -e "Docker Installation" 
-which docker || { curl -fsSL https://get.docker.com | bash; }
-{
-systemctl enable docker
-systemctl restart docker
-systemctl is-active --quiet docker && echo -e "\e[1m \e[96m docker service: \e[30;48;5;82m \e[5mRunning \e[0m" || echo -e "\e[1m \e[96m docker service: \e[30;48;5;196m \e[5mNot Running \e[0m"
-}
 
-echo "Configur docker daemon "
-DOCKER_DEST=/etc/systemd/system/docker.service.d/
-if [ -d $DOCKER_DEST ] ; then
-   echo "file exist"
-else
-   mkdir -p /etc/systemd/system/docker.service.d/
-   touch /etc/systemd/system/docker.service.d/override.conf
-fi   
 
-cat <<EOT > /etc/systemd/system/docker.service.d/override.conf
-[Service]
-ExecStart=
-ExecStart=/usr/bin/dockerd --log-opt max-size=100m --log-opt max-file=5
-EOT
-cat /etc/systemd/system/docker.service.d/override.conf
-{
-systemctl daemon-reload
-systemctl restart docker
-systemctl is-active --quiet docker && echo -e "\e[1m \e[96m docker service: \e[30;48;5;82m \e[5mRunning \e[0m" || echo -e "\e[1m \e[96m docker service: \e[30;48;5;196m \e[5mNot Running \e[0m"
-}
-
-echo "how to fix WARNING: No swap limit support"
-cat /etc/default/grub
-echo "GRUB_CMDLINE_LINUX=\"cgroup_enable=memory swapaccount=1\"" >> /etc/default/grub
-cat /etc/default/grub
-sudo update-grub
-```
-
-### Pre-configuration kubernetes
-### On master and worker nodes
+## Pre-configuration kubernetes (On master and worker nodes)
 ```bash
 echo "Add sysctl settings"
 cat >>/etc/sysctl.d/kubernetes.conf<<EOF
@@ -87,10 +168,6 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system >/dev/null 2>&1
-
-echo "Disable and turn off SWAP"
-sed -i '/swap/d' /etc/fstab
-swapoff -a
 
 echo "Installing apt-transport-https pkg"
 apt-get update && apt-get install -y apt-transport-https ca-certificates curl software-properties-common
@@ -119,7 +196,7 @@ systemctl start kubelet
 systemctl status kubelet 
 ```
 
-### haproxy and keepalived install and configuration
+## haproxy and keepalived install and configuration
 ### On API loadbalancer nodes
 ```bash
 echo "install haproxy and keepalived service"
@@ -253,7 +330,7 @@ systemctl is-active --quiet keepalived && echo -e "\e[1m \e[96m keepalived servi
 echo "check vip"
 ip a | grep 192.168.1.44/32
 ```
-### kubeadm config
+## kubeadm config
 ### On master1
 ```bash
 echo "create kubeadm config file"
@@ -396,7 +473,7 @@ sudo ETCDCTL_API=3 etcdctl $flags --endpoints=${endpoints} alarm list
 etcdctl member list $flags --endpoints=${endpoint} --write-out=table
 etcdctl endpoint status $flags --endpoints=${endpoint} --write-out=table
 ```
-### master and worker join cluster
+## master and worker join cluster
 ### after initializing master 1 run these steps
 - join master2:
   - check pod
