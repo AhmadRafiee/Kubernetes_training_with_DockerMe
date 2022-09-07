@@ -25,7 +25,7 @@ EOF
 sudo sysctl --system
 ```
 
-## Install Containerd (On all Servers)
+## Install Containerd (On all kube nodes)
 ### Using Docker repository
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -41,8 +41,8 @@ sudo sed -i 's/^disabled_plugins \=/\#disabled_plugins \=/g' /etc/containerd/con
 sudo systemctl restart containerd
 sudo systemctl status containerd
 ```
-## Using Containerd binaries (offical)
-### Install Containerd core
+### Using Containerd binaries (offical)
+#### Install Containerd core
 First, download the latest version of `containerd` from [GitHub](https://github.com/containerd/containerd/releases) and extract the files to the `/usr/local/` directory.
 
 ```bash
@@ -77,7 +77,7 @@ View Containerd service status
 ```bash
 sudo systemctl status containerd
 ```
-### Install runC
+#### Install runC
 
 runC is an open-source container runtime for spawning and running containers on Linux according to the OCI specification.
 
@@ -90,7 +90,7 @@ wget "https://github.com/opencontainers/runc/releases/download/v${runc_version}/
 sudo install -m 755 runc.amd64 /usr/local/sbin/runc
 ```
 
-### Install CNI Plugins For Containerd
+#### Install CNI Plugins For Containerd
 
 For the container to run, you need to install CNI plugins. So, download the latest version of CNI plugins from [GitHub](https://github.com/containernetworking/plugins/releases) and place them in the `/opt/cni/bin` directory.
 ```bash
@@ -107,7 +107,7 @@ Restart the containerd service.
 sudo systemctl restart containerd
 ```
 
-### Install Nerdctl (Optional)
+#### Install Nerdctl (Optional)
 nerdctl is a Docker-compliant command-line interface for containerd. It is not part of the core package. So, this has to be installed separately.
 
 Download the latest version of `nerdctl` from [GitHub](https://github.com/containerd/nerdctl/releases) and extract it to the `/usr/local/bin` directory.
