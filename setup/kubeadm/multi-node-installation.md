@@ -38,8 +38,12 @@ cat <<EOF | sudo tee -a /etc/containerd/config.toml
 SystemdCgroup = true
 EOF
 sudo sed -i 's/^disabled_plugins \=/\#disabled_plugins \=/g' /etc/containerd/config.toml
+{
+sudo systemctl daemon-reload
+sudo systemctl enable containerd
 sudo systemctl restart containerd
-sudo systemctl status containerd
+sudo systemctl is-active --quiet containerd && echo -e "\e[1m \e[96m Containerd Service: \e[30;48;5;82m \e[5mRunning \e[0m" || echo -e "\e[1m \e[96m Containerd Service: \e[30;48;5;196m \e[5mNot Running \e[0m"
+}
 ```
 ### Using Containerd binaries (offical)
 #### Install Containerd core
@@ -70,13 +74,14 @@ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/c
 Install Containerd service
 ```bash
 sudo mv containerd.service /usr/lib/systemd/system/
+{
 sudo systemctl daemon-reload
-sudo systemctl enable --now containerd
+sudo systemctl enable containerd
+sudo systemctl restart containerd
+sudo systemctl is-active --quiet containerd && echo -e "\e[1m \e[96m Containerd Service: \e[30;48;5;82m \e[5mRunning \e[0m" || echo -e "\e[1m \e[96m Containerd Service: \e[30;48;5;196m \e[5mNot Running \e[0m"
+}
 ```
-View Containerd service status
-```bash
-sudo systemctl status containerd
-```
+
 #### Install runC
 
 runC is an open-source container runtime for spawning and running containers on Linux according to the OCI specification.
