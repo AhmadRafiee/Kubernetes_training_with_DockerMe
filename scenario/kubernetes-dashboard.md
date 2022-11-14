@@ -56,6 +56,12 @@ subjects:
   namespace: kubernetes-dashboard
 EOF
 ```
+
+### Getting a Bearer Token
+Now we need to find the token we can use to log in. Execute the following command:
+```bash
+kubectl -n kubernetes-dashboard create token admin-user
+```
 ### check objects
 ```bash
 kubectl get pod,service,deployment -n kubernetes-dashboard
@@ -63,4 +69,9 @@ kubectl get pod,service,deployment -n kubernetes-dashboard
 ### Getting a Bearer Token
 ```bash
 kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+```
+
+### Kubernetes dashboard port forward:​
+```bash
+kubectl -n kubernetes-dashboard port-forward kubernetes-dashboard-<POD_ID> 8001:8443​
 ```
