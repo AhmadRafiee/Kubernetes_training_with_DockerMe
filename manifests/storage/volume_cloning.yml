@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: clone-of-scale-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: [name_of_your_storageclass]
+  resources:
+    requests:
+      storage: 5Gi
+  dataSource:
+    kind: PersistentVolumeClaim
+    name: scale-pvc
+

@@ -86,7 +86,7 @@ The tools and sample needed to learn the Kubernetes.
  - https://github.com/ondrejsika/kubernetes-training
  - https://blog.container-solutions.com/kubernetes-deployment-strategies
  - https://github.com/ContainerSolutions/k8s-deployment-strategies
- - 
+
 
 
 # 🔗 Links
