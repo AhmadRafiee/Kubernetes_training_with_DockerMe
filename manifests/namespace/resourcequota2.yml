@@ -1,20 +1,14 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: compute
+  name: default
+  namespace: default
 spec:
   hard:
     requests.cpu: "1"
     requests.memory: 1Gi
     limits.cpu: "2"
     limits.memory: 2Gi
----
-apiVersion: v1
-kind: ResourceQuota
-metadata:
-  name: object
-spec:
-  hard:
     configmaps: "1"
     persistentvolumeclaims: "1"
     pods: "2"

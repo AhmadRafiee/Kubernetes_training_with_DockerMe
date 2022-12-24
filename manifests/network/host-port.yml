@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: influxdb
+spec:
+  containers:
+    - name: influxdb
+      image: influxdb
+      ports:
+        - containerPort: 8086
+          hostPort: 8086

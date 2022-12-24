@@ -4,7 +4,7 @@ metadata:
   name: php-apache
 spec:
   minReplicas: 3
-  maxReplicas: 10 # 10000
+  maxReplicas: 20
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
@@ -16,10 +16,10 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 50
+        averageUtilization: 25
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: 10
+        averageUtilization: 25

@@ -1,0 +1,94 @@
+apiVersion: kubeadm.k8s.io/v1beta2
+bootstrapTokens:
+- groups:
+  - system:bootstrappers:kubeadm:default-node-token
+  token: abcdef.0123456789abcdef
+  ttl: 24h0m0s
+  usages:
+  - signing
+  - authentication
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: ${master1_ip}
+  bindPort: 6443
+nodeRegistration:
+  criSocket: /var/run/dockershim.sock
+  name: master1
+  taints:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+---
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
+apiServer:
+  extraArgs:
+    authorization-mode: "Node,RBAC"
+  timeoutForControlPlane: 4m0s
+  certSANs:
+  - "${vip_api}"
+  - "${master1_ip}"
+  - "${master2_ip}"
+  - "${master3_ip}"
+  - "${vip_api_name}"
+  - "vip"
+  - "${master1_name}"
+  - "${master2_name}"
+  - "${master3_name}"
+  - "vip.${domain_name}"
+  - "${vip_api_name}.${domain_name}"
+  - "${master1_name}.${domain_name}"
+  - "${master2_name}.${domain_name}"
+  - "${master3_name}.${domain_name}"
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+dns:
+  type: CoreDNS
+etcd:
+  local:
+    imageRepository: "quay.io/coreos"
+    imageTag: "v3.4.16"
+    dataDir: "/var/lib/etcd"
+    serverCertSANs:
+      - "${vip_api}"
+      - "${master1_ip}"
+      - "${master2_ip}"
+      - "${master3_ip}"
+      - "${vip_api_name}"
+      - "vip"
+      - "${master1_name}"
+      - "${master2_name}"
+      - "${master3_name}"
+      - "${vip_api_name}.${domain_name}"
+      - "${master1_name}.${domain_name}"
+      - "${master2_name}.${domain_name}"
+      - "${master3_name}.${domain_name}"
+    peerCertSANs:
+      - "${vip_api}"
+      - "${master1_ip}"
+      - "${master2_ip}"
+      - "${master3_ip}"
+      - "${vip_api_name}"
+      - "vip"
+      - "${master1_name}"
+      - "${master2_name}"
+      - "${master3_name}"
+      - "${vip_api_name}.${domain_name}"
+      - "${master1_name}.${domain_name}"
+      - "${master2_name}.${domain_name}"
+      - "${master3_name}.${domain_name}"
+#kubernetesVersion: "v1.21.1"
+imageRepository: "k8s.gcr.io"
+useHyperKubeImage: false
+controlPlaneEndpoint: "vip.${domain_name}:6443"
+networking:
+  serviceSubnet: "10.96.0.0/12"
+  podSubnet: "172.124.0.0/17"
+  dnsDomain: "cluster.local"
+---
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+# kubelet specific options here
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+# kube-proxy specific options here

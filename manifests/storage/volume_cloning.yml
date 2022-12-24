@@ -4,12 +4,10 @@ metadata:
     name: clone-of-scale-pvc
 spec:
   accessModes:
-  - ReadWriteOnce
-  storageClassName: [name_of_your_storageclass]
+  - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
   dataSource:
     kind: PersistentVolumeClaim
     name: scale-pvc
-

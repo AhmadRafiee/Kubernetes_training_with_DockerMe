@@ -1,18 +1,19 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: test-pd
+  name: test-host-path
 spec:
   containers:
-  - image: k8s.gcr.io/test-webserver
-    name: test-container
+  - image: busybox:1.28
+    name: test-host-path-container
+    command: ['sh', '-c', 'sleep 3600']
     volumeMounts:
-    - mountPath: /test-pd
+    - mountPath: /opt/
       name: test-volume
   volumes:
   - name: test-volume
     hostPath:
       # directory location on host
-      path: /data
+      path: /mnt/
       # this field is optional
       type: Directory
