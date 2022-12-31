@@ -8,7 +8,7 @@ The tools and sample needed to learn the Kubernetes.
   - [vagrant virtualbox provider](vagrant/vbox-environment)
 
 
-- [Kubernetes Setup:](setup)  
+- [Kubernetes Setup:](setup)
   - [kind config files](setup/kind/kind.md)
   - [kind ingress config](setup/kind/kind-ingress.yml)
   - [kind port mapping config](setup/kind/kind-port-mapping.yml)
@@ -47,8 +47,12 @@ The tools and sample needed to learn the Kubernetes.
   - [kubeapps](scenario/kubeapps.md)
   - [kubernetes backup|restore with velero](scenario/velero.md)
   - [Cassandra with StatefulSets on Kubernetes](https://github.com/kubernetes/examples/tree/master/cassandra)
-  
+  - [Create reader user on cluster](scenario/Create-read-only-user-on-cluster.md)
+  - [Create reader user on namespace](scenario/Create-read-only-user.md)
 
+- [Kubernetes Components:](components)
+  - [etcd resource check](components/etcd-resource-check.md)
+  - [api server audit log](components/api-server-audit-log.md)
 
 - [Kubernetes Manifests:](manifests)
   - [daemonset](manifests/daemonset)
@@ -65,19 +69,21 @@ The tools and sample needed to learn the Kubernetes.
 
 - [Others:](others)
   - [Phippy and friends:](others/Phippy_and_friends)
+  - [Kubernetes up & running:](others/eBooks/kubernetes-up-running.pdf)
+  - [Kubernetes in action:](others/eBooks/Kubernetes_in_Action.pdf)
 
 
 # In Progress Task:
-- etcdadm: https://github.com/kubernetes-sigs/etcdadm
-- minikube
-- k3s
-- private-registry harbor
-- pdf and ebook
-- other resource
-- HPA
-- kubespray
-
-
+- [ ] [etcdadm](https://github.com/kubernetes-sigs/etcdadm)
+- [ ] minikube
+- [ ] k3s
+- [ ] private-registry harbor
+- [x] pdf and ebook
+- [x] HPA
+- [ ] kubespray
+- [x] reader user on cluster
+- [x] reader user on namespace
+- [x] security manifest
 
 # Reference:
  - https://kubernetes.io
