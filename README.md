@@ -68,9 +68,9 @@ The tools and sample needed to learn the Kubernetes.
 
 
 - [Others:](others)
-  - [Phippy and friends:](others/Phippy_and_friends)
-  - [Kubernetes up & running:](others/eBooks/kubernetes-up-running.pdf)
-  - [Kubernetes in action:](others/eBooks/Kubernetes_in_Action.pdf)
+  - [Phippy and friends](others/Phippy_and_friends)
+  - [Kubernetes up & running](others/eBooks/kubernetes-up-running.pdf)
+  - [Kubernetes in action](others/eBooks/Kubernetes_in_Action.pdf)
 
 
 # In Progress Task:
