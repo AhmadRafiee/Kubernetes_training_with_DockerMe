@@ -12,7 +12,7 @@ The tools and sample needed to learn the Kubernetes.
   - [kind config files](setup/kind/kind.md)
   - [kind ingress config](setup/kind/kind-ingress.yml)
   - [kind port mapping config](setup/kind/kind-port-mapping.yml)
-  - [kind multinode custom config](setup/kind/multinode-custom-version.yml)
+  - [kind multi-node custom config](setup/kind/multinode-custom-version.yml)
   - [kubernetes multi-node installation](setup/kubeadm/multi-node-installation.md)
   - [kubernetes multi-node update](setup/kubeadm/multi-node-update.md)
 
@@ -49,6 +49,7 @@ The tools and sample needed to learn the Kubernetes.
   - [Cassandra with StatefulSets on Kubernetes](https://github.com/kubernetes/examples/tree/master/cassandra)
   - [Create reader user on cluster](scenario/Create-read-only-user-on-cluster.md)
   - [Create reader user on namespace](scenario/Create-read-only-user.md)
+  - [Network policy sample](scenario/network-policy.md)
 
 - [Kubernetes Components:](components)
   - [etcd resource check](components/etcd-resource-check.md)
@@ -74,13 +75,21 @@ The tools and sample needed to learn the Kubernetes.
 
 
 # In Progress Task:
-- [ ] [etcdadm](https://github.com/kubernetes-sigs/etcdadm)
-- [ ] minikube
-- [ ] k3s
-- [ ] private-registry harbor
+- [ ] Installations:
+  - [ ] [etcdadm](https://github.com/kubernetes-sigs/etcdadm)
+  - [ ] minikube
+  - [ ] k3s
+  - [ ] kubespray
+  - [ ] multi-node new version and with containerd
+- [ ] Kubernetes add-ons:
+  - [ ] Ingress: nginx
+  - [ ] Certificate management: cert-manager
+  - [ ] Private registry: harbor
+  - [ ] Monitoring: kube-prometheus-stack
+  - [ ] Logging: loki stack
+  - [ ] Metric Server: kube-metric-server
 - [x] pdf and ebook
 - [x] HPA
-- [ ] kubespray
 - [x] reader user on cluster
 - [x] reader user on namespace
 - [x] security manifest
