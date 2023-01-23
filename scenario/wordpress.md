@@ -10,6 +10,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: mysql-pass
+type: Opaque
 data:
   password: YOUR_PASSWORD
 ---

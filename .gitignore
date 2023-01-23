@@ -3,3 +3,7 @@
 .vagrant
 *.iso
 *iso
+*.tar
+*.tar.gz
+*.gz
+setup/RKE/rancher-images.tar.gz

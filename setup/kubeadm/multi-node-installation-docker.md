@@ -114,9 +114,9 @@ kubeadm version
 kubectl version
 
 echo "Enable and start kubelet service"
-systemctl enable kubelet 
-systemctl start kubelet  
-systemctl status kubelet 
+systemctl enable kubelet
+systemctl start kubelet
+systemctl status kubelet
 ```
 
 ### haproxy and keepalived install and configuration

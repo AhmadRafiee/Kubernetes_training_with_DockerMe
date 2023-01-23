@@ -24,3 +24,4 @@ kubectl edit deployment metrics-server
 ```
 ### VPA Requirements:
 https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler
+

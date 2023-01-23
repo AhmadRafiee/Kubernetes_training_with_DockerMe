@@ -13,8 +13,13 @@ The tools and sample needed to learn the Kubernetes.
   - [kind ingress config](setup/kind/kind-ingress.yml)
   - [kind port mapping config](setup/kind/kind-port-mapping.yml)
   - [kind multi-node custom config](setup/kind/multinode-custom-version.yml)
-  - [kubernetes multi-node installation](setup/kubeadm/multi-node-installation.md)
+  - [kubernetes multi-node installation docker](setup/kubeadm/multi-node-installation-docker.md)
+  - [kubeadm config docker cri](setup/kubeadm/kubeadm-config-docker.yml)
   - [kubernetes multi-node update](setup/kubeadm/multi-node-update.md)
+  - [kubernetes multi-node installation containerd](setup/kubeadm/multi-node-installation-containerd.md)
+  - [kubeadm config containerd cri](setup/kubeadm/kubeadm-config-containerd.yml)
+  - [RKE kubernetes cluster setup](setup/RKE/rke.md)
+  - [RKE kubernetes cluster config](setup/RKE/cluster.yml)
 
 
 - [Kubernetes Tools:](tools)
@@ -78,9 +83,10 @@ The tools and sample needed to learn the Kubernetes.
 - [ ] Installations:
   - [ ] [etcdadm](https://github.com/kubernetes-sigs/etcdadm)
   - [ ] minikube
-  - [ ] k3s
+  - [ ] k3d
   - [ ] kubespray
-  - [ ] multi-node new version and with containerd
+  - [x] multi-node new version and with containerd
+  - [x] rancher kubernetes engine (RKE)
 - [ ] Kubernetes add-ons:
   - [ ] Ingress: nginx
   - [ ] Certificate management: cert-manager
@@ -101,7 +107,7 @@ The tools and sample needed to learn the Kubernetes.
  - https://github.com/ondrejsika/kubernetes-training
  - https://blog.container-solutions.com/kubernetes-deployment-strategies
  - https://github.com/ContainerSolutions/k8s-deployment-strategies
-
+ - https://ranchermanager.docs.rancher.com
 
 
 # 🔗 Links

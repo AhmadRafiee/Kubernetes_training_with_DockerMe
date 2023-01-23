@@ -1,40 +1,44 @@
 IMAGE_1604 = "bento/ubuntu-16.04"
 IMAGE_1804 = "bento/ubuntu-18.04"
 IMAGE_2004 = "bento/ubuntu-20.04"
+IMAGE_2204 = "bento/ubuntu-22.04"
 
 ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 
 Vagrant.configure(2) do |config|
+  config.proxy.http = "http://192.168.56.1:8123"
+  config.proxy.https = "http://192.168.56.1:8123"
+  config.proxy.no_proxy = "localhost,127.0.0.1,192.168.56.0/24,repo.rke.mecan.ir,*.rke.mecan.ir"
   config.vm.provision "shell", path: "bootstrap.sh"
 
-  NodeType1 = 1
-  (1..NodeType1).each do |type1_id|
-    config.vm.define "type1#{type1_id}" do |type1_vm|
-      type1_vm.vm.box = IMAGE_2004
-      type1_vm.vm.hostname = "type1#{type1_id}.example.com"
-      type1_vm.vm.network "private_network", ip: "172.10.10.10#{type1_id}"
-      type1_vm.vm.provider "virtualbox" do |v|
-        v.name = "type1#{type1_id}"
+  NodeMaster = 3
+  (1..NodeMaster).each do |master_id|
+    config.vm.define "master#{master_id}" do |master_vm|
+      master_vm.vm.box = IMAGE_2204
+      master_vm.vm.hostname = "master#{master_id}.kube.mecan.ir"
+      master_vm.vm.network "private_network", ip: "192.168.56.10#{master_id}"
+      master_vm.vm.provider "virtualbox" do |v|
+        v.name = "master#{master_id}"
         v.memory = 2048
         v.cpus = 2
       end
-      type1_vm.vm.provision "shell", path: "bootstrap_t1.sh"
+      master_vm.vm.provision "shell", path: "bootstrap_master.sh"
     end
   end
 
 
-  NodeType2 = 0
-  (1..NodeType2).each do |type2_id|
-    config.vm.define "type2#{type2_id}" do |type2_vm|
-      type2_vm.vm.box = IMAGE_1604
-      type2_vm.vm.hostname = "type2#{type2_id}.example.com"
-      type2_vm.vm.network "private_network", ip: "172.10.10.11#{type2_id}"
-      type2_vm.vm.provider "virtualbox" do |v|
-        v.name = "type2#{type2_id}"
+  NodeWorker = 3
+  (1..NodeWorker).each do |worker_id|
+    config.vm.define "worker#{worker_id}" do |worker_vm|
+      worker_vm.vm.box = IMAGE_1604
+      worker_vm.vm.hostname = "worker#{worker_id}.kube.mecan.ir"
+      worker_vm.vm.network "private_network", ip: "192.168.56.11#{worker_id}"
+      worker_vm.vm.provider "virtualbox" do |v|
+        v.name = "worker#{worker_id}"
         v.memory = 1024
         v.cpus = 1
       end
-      type2_vm.vm.provision "shell", path: "bootstrap_t2.sh"
+      worker_vm.vm.provision "shell", path: "bootstrap_worker.sh"
     end
   end
 end
