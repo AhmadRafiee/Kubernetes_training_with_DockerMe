@@ -27,7 +27,7 @@ Vagrant.configure(2) do |config|
   end
 
 
-  NodeWorker = 3
+  NodeWorker = 0
   (1..NodeWorker).each do |worker_id|
     config.vm.define "worker#{worker_id}" do |worker_vm|
       worker_vm.vm.box = IMAGE_1604
