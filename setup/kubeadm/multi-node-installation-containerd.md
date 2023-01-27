@@ -299,8 +299,6 @@ apiServer:
 apiVersion: kubeadm.k8s.io/v1beta3
 certificatesDir: /etc/kubernetes/pki
 clusterName: kubernetes
-dns:
-  type: CoreDNS
 etcd:
   local:
     imageRepository: "quay.io/coreos"
