@@ -9,7 +9,7 @@ mkdir /etc/kubernetes/audit
 **Step 2:** Create an audit policy
 Create an audit policy file named /etc/kubernetes/audit/policy.yaml with the following data:
 ```bash
-cat <<EOF | kubectl apply -f -
+cat <<EOF > /etc/kubernetes/audit/policy.yaml
 apiVersion: audit.k8s.io/v1
 kind: Policy
 rules:

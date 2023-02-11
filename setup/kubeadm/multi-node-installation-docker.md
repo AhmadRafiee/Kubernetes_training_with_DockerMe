@@ -2,7 +2,7 @@
 ### On all Servers
 ```bash
 echo "Change hostname"
-hostnamectl set-hostname 
+hostnamectl set-hostname
 
 echo "update and upgrade"
 apt update ; apt upgrade -y

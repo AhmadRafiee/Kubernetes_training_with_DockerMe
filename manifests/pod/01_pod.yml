@@ -3,8 +3,7 @@ kind: Pod
 metadata:
   name: simple-hello-world
   labels:
-    app: simple-hello-world
-    svc: example
+    app: hello-world-deploy
 spec:
   containers:
     - name: main

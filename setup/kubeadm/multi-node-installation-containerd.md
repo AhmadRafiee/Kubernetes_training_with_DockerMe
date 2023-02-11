@@ -370,7 +370,7 @@ kubeadm certs check-expiration
 openssl x509 -text -noout -in /etc/kubernetes/pki/apiserver.crt 
 
 echo "Deploy Calico network"
-kubectl create -f https://docs.projectcalico.org/v3.24/manifests/calico.yaml
+kubectl create -f https://docs.projectcalico.org/latest/manifests/calico.yaml
 
 echo "Install etcdctl On Ubuntu 16.04/18.04 "
 etcd_version=v3.5.4

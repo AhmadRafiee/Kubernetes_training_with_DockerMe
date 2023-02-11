@@ -7,7 +7,6 @@ mv rke_linux-amd64 rke
 sudo mv rke /usr/local/bin
 ```
 
-
 ## Collect and Publish Images to your Private Registry
 
 Get bash scripts:
