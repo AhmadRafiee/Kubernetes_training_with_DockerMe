@@ -55,6 +55,7 @@ The tools and sample needed to learn the Kubernetes.
   - [Create reader user on cluster](scenario/Create-read-only-user-on-cluster.md)
   - [Create reader user on namespace](scenario/Create-read-only-user.md)
   - [Network policy sample](scenario/network-policy.md)
+  - [Kubernetes Demo Project](scenario/kubernetes-demo-project.md)
 
 - [Kubernetes Components:](components)
   - [etcd resource check](components/etcd-resource-check.md)
