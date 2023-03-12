@@ -43,14 +43,15 @@ domain_name=monlog.ir
 ### On all Servers
 ```bash
 # Install repo dependency
-sudo apt-get install ca-certificates curl gnupg lsb-release
+sudo apt-get install ca-certificates curl gnupg lsb-release apt-transport-https gpg
 
 # Add Docker’s official GPG key:
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo mkdir -p /etc/apt/keyrings && sudo chmod -R 0755 /etc/apt/keyrings
+curl -fsSL "https://download.docker.com/linux/debian/gpg" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
+chmod a+r /etc/apt/keyrings/docker.gpg
 
 # Use the following command to set up the repository:
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bullseye stable" > /etc/apt/sources.list.d/docker.list
 sudo apt-get update
 
 # install containerd
@@ -370,7 +371,7 @@ kubeadm certs check-expiration
 openssl x509 -text -noout -in /etc/kubernetes/pki/apiserver.crt 
 
 echo "Deploy Calico network"
-kubectl create -f https://docs.projectcalico.org/latest/manifests/calico.yaml
+kubectl create -f https://docs.projectcalico.org/v3.25/manifests/calico.yaml
 
 echo "Install etcdctl On Ubuntu 16.04/18.04 "
 etcd_version=v3.5.4
