@@ -5,7 +5,7 @@
 ### Install etcdctl On Ubuntu 16.04/18.04
 ```bash
 etcd_version=v3.4.16
-curl -L https://github.com/coreos/etcd/releases/download/$etcd_version/etcd-$etcd_version-linux-amd64.tar.gz -o etcd-$etcd_version-linux-amd64.tar.gz
+curl -L https://github.com/etcd-io/etcd/releases/download/$etcd_ersion/etcd-$etcd_ersion-linux-amd64.tar.gz -o etcd-$etcd_version-linux-amd64.tar.gz
 tar xzvf etcd-$etcd_version-linux-amd64.tar.gz
 rm etcd-$etcd_version-linux-amd64.tar.gz
 cp etcd-$etcd_version-linux-amd64/etcdctl /usr/local/bin/
