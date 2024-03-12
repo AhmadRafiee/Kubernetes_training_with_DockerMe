@@ -25,7 +25,7 @@ spec:
           memory: 50Mi
           cpu: 30m
     - name: date
-      image: debian
+      image: busybox:1.28
       volumeMounts:
         - name: html
           mountPath: /html

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: default
-  namespace: default
+  namespace: asghar
 spec:
   hard:
     requests.cpu: "1"

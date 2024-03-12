@@ -17,6 +17,7 @@ spec:
         command:
         - cat
         - /tmp/healthy
+      failureThreshold: 1
       initialDelaySeconds: 5
       periodSeconds: 5
 ---

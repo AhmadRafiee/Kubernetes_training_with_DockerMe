@@ -17,3 +17,4 @@ spec:
         limits:
           memory: 20Mi
           cpu: 20m
+  priorityClassName: system-node-critical

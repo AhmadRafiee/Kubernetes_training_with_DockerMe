@@ -1,7 +1,7 @@
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: php-apache
+  name: hpa-php-apache
 spec:
   minReplicas: 3
   maxReplicas: 20
@@ -16,10 +16,10 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 25
+        averageUtilization: 90
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: 25
+        averageUtilization: 80

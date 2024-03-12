@@ -24,7 +24,7 @@ spec:
   selector:
     matchLabels:
       app: hello-world-sts
-  replicas: 5
+  replicas: 10
   template:
     metadata:
       labels:

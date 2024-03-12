@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: sample-node-name
 spec:
-  nodeName: dockerme-worker3
+  nodeName: master1
   containers:
   - name: nginx
     image: nginx

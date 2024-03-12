@@ -14,6 +14,6 @@ spec:
   - name: test-volume
     hostPath:
       # directory location on host
-      path: /mnt/
+      path: /etc/kubernetes/pki/
       # this field is optional
       type: Directory

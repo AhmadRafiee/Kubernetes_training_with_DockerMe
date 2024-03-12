@@ -11,7 +11,7 @@ spec:
     targetPort: 5000
   selector:
     app: web
-  type: LoadBalancer    
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -42,7 +42,7 @@ spec:
           - labelSelector:
               matchExpressions:
               - key: app
-                operator: NotIn
+                operator: In
                 values:
                 - redis
             topologyKey: "kubernetes.io/hostname"

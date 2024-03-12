@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finalizer-test
+    labels:
+    app: finalizer-test
+  finalizers:
+    - finalizer.extensions/v1beta1
+spec:
+  selector:
+    matchLabels:
+      app: finalizer-test
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: finalizer-test
+    spec:
+      containers:
+        - name: hieveryone
+          image:  nginx:alpine 
+          imagePullPolicy: Always
+          ports:
+            - name: helloworldport
+              containerPort: 8080

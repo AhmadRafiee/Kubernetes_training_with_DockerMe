@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-blue
+  annotations:
+    kubernetes.io/change-cause: ver1
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: hello-world-blue
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: hello-world-blue
+        svc: example
+    spec:
+      containers:
+        - name: hello-world
+          image: ahmadrafiee/go-hello-world:1
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-green
+  annotations:
+    kubernetes.io/change-cause: ver1
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: hello-world-green
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: hello-world-green
+        svc: example
+    spec:
+      containers:
+        - name: hello-world
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue-green
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: hello-world-blue
+

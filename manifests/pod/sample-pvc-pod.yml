@@ -28,7 +28,7 @@ spec:
         app: wordpress
     spec:
       containers:
-      - image: busybox
+      - image: busybox:1.28
         command: ['sh', '-c', 'sleep 3600']
         name: test-pvc
         volumeMounts:

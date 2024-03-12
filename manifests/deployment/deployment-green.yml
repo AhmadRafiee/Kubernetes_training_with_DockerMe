@@ -1,28 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rolling-update
+  name: hello-world-green
   annotations:
     kubernetes.io/change-cause: ver1
 spec:
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: rolling-update
-  replicas: 20
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+      app: hello-world-green
+  replicas: 5
   template:
     metadata:
       labels:
-        app: rolling-update
+        app: hello-world-green
         svc: example
     spec:
       containers:
         - name: hello-world
-          image: ahmadrafiee/go-hello-world:1
+          image: nginx:alpine
           ports:
             - containerPort: 80
           resources:
@@ -32,16 +28,3 @@ spec:
             limits:
               memory: 20Mi
               cpu: 20m
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: rolling-update
-spec:
-  type: NodePort
-  ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 80
-  selector:
-    app: rolling-update

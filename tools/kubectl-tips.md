@@ -146,8 +146,8 @@ By default drop-down suggestion list also displays in-line documentation, you ca
 You can run any shell command by prefixing command with "!". For e.g. !ls would list from the current directory.
 
 # kail: kubernetes tail
-### [URL](https://github.com/boz/kail)
-### Kubernetes tail. Streams logs from all containers of all matched pods. Match pods by service, replicaset, deployment, and others. Adjusts to a changing cluster - pods are added and removed from logging as they fall in or out of the selection.
+[URL](https://github.com/boz/kail)
+Kubernetes tail. Streams logs from all containers of all matched pods. Match pods by service, replicaset, deployment, and others. Adjusts to a changing cluster - pods are added and removed from logging as they fall in or out of the selection.
 ### Installing
 Kail binaries for Linux and OSX can be found on the latest release page. Download and install into your $GOPATH/bin with:
 ```bash
@@ -156,8 +156,8 @@ bash <( curl -sfL https://raw.githubusercontent.com/boz/kail/master/godownloader
 
 # kubectl-tree
 ### [URL](https://github.com/ahmetb/kubectl-tree)
-### A kubectl plugin to explore ownership relationships between Kubernetes objects through ownersReferences on the objects.
-### The kubectl lineage plugin is very similar to kubectl tree, but it understands logical relationships between some API objects without needing ownerReferences.
+A kubectl plugin to explore ownership relationships between Kubernetes objects through ownersReferences on the objects.
+The kubectl lineage plugin is very similar to kubectl tree, but it understands logical relationships between some API objects without needing ownerReferences.
 ### Installation:
 
 Use krew plugin manager to install:
@@ -170,6 +170,19 @@ kubectl tree --help
 ![kube tree](../photo/kube-tree.png "kube tree")
 
 
+# kubecolor
+
+[kubecolor:](https://github.com/hidetatz/kubecolor) Colorize your kubectl output
+## Demo
+![kubecolor](../photo/kubecolor.png "kubecolor")
+
+
+
 # Others good Tips
 - [kubectl-df-pv:](https://github.com/yashbhutwala/kubectl-df-pv) A kubectl plugin to see df for persistent volumes.
 - [kubectl-images:](https://github.com/chenjiandongx/kubectl-images) Show container images used in the cluster
+- [kurt:](https://github.com/soraro/kurt) KUbernetes Restart Tracker
+- [kubent:](https://github.com/doitintl/kube-no-trouble) Easily check your clusters for use of deprecated APIs
+
+
+
